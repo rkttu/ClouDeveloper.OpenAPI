@@ -13,6 +13,7 @@ set projectname=ClouDeveloper.OpenAPI.TED
 set projectname=ClouDeveloper.OpenAPI.Naver
 .nuget\nuget.exe pack %projectname%\%projectname%.csproj -Build -Symbols -IncludeReferencedProjects -OutputDirectory "RedistPackages\libs" -Properties configuration=Release
 
+.nuget\NuGet.exe push RedistPackages\libs\ClouDeveloper.OpenAPI.*.nupkg
 start RedistPackages
 
 popd
