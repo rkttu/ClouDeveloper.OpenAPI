@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -58,7 +59,8 @@ namespace ClouDeveloper.OpenAPI.TED.Search
 
         public XmlDocument SearchAllRaw(
             string query,
-            string category = default(string))
+            string category = default(string),
+            CultureInfo targetCulture = default(CultureInfo))
         {
             XmlDocument doc = new XmlDocument();
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>(new KeyValuePair<string, string>[] {
@@ -69,13 +71,17 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             if (category != default(string))
                 parameters.Add(new KeyValuePair<string,string>("categories", category));
 
+            if (targetCulture != default(CultureInfo))
+                parameters.Add(new KeyValuePair<string, string>("language", targetCulture.IetfLanguageTag));
+
             doc.Load(BuildRequestUri(parameters.ToArray()).AbsoluteUri);
             return AssertResponse(doc);
         }
 
         public IEnumerable<ITEDItem> SearchAll(
             string query,
-            string category = default(string))
+            string category = default(string),
+            CultureInfo targetCulture = default(CultureInfo))
         {
             XmlDocument doc = this.SearchAllRaw(query, category);
             List<ITEDItem> items = new List<ITEDItem>();
@@ -121,53 +127,53 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return items.AsReadOnly();
         }
 
-        public XmlDocument SearchTalksRaw(string query)
-        { return this.SearchAllRaw(query, "talks"); }
+        public XmlDocument SearchTalksRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "talks", targetCulture); }
 
-        public IEnumerable<TEDTalk> SearchTalks(string query)
-        { return this.SearchAll(query, "talks").Cast<TEDTalk>(); }
+        public IEnumerable<TEDTalk> SearchTalks(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "talks", targetCulture).Cast<TEDTalk>(); }
 
-        public XmlDocument SearchPlaylistsRaw(string query)
-        { return this.SearchAllRaw(query, "playlists"); }
+        public XmlDocument SearchPlaylistsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "playlists", targetCulture); }
 
-        public IEnumerable<TEDPlaylist> SearchPlaylists(string query)
-        { return this.SearchAll(query, "playlists").Cast<TEDPlaylist>(); }
+        public IEnumerable<TEDPlaylist> SearchPlaylists(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "playlists", targetCulture).Cast<TEDPlaylist>(); }
         
-        public XmlDocument SearchBlogPostsRaw(string query)
-        { return this.SearchAllRaw(query, "blog_posts"); }
+        public XmlDocument SearchBlogPostsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "blog_posts", targetCulture); }
 
-        public IEnumerable<TEDWordPressPost> SearchBlogPosts(string query)
-        { return this.SearchAll(query, "blog_posts").Cast<TEDWordPressPost>(); }
+        public IEnumerable<TEDWordPressPost> SearchBlogPosts(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "blog_posts", targetCulture).Cast<TEDWordPressPost>(); }
 
-        public XmlDocument SearchConversationsRaw(string query)
-        { return this.SearchAllRaw(query, "converstations"); }
+        public XmlDocument SearchConversationsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "converstations", targetCulture); }
 
-        public IEnumerable<TEDConversation> SearchConversations(string query)
-        { return this.SearchAll(query, "converstations").Cast<TEDConversation>(); }
+        public IEnumerable<TEDConversation> SearchConversations(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "converstations", targetCulture).Cast<TEDConversation>(); }
 
-        public XmlDocument SearchTEDLocalEventsRaw(string query)
-        { return this.SearchAllRaw(query, "tedx_events"); }
+        public XmlDocument SearchTEDLocalEventsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "tedx_events", targetCulture); }
 
-        public IEnumerable<TEDLocalEvent> SearchTEDLocalEvents(string query)
-        { return this.SearchAll(query, "tedx_events").Cast<TEDLocalEvent>(); }
+        public IEnumerable<TEDLocalEvent> SearchTEDLocalEvents(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "tedx_events", targetCulture).Cast<TEDLocalEvent>(); }
 
-        public XmlDocument SearchSpeakersRaw(string query)
-        { return this.SearchAllRaw(query, "speakers"); }
+        public XmlDocument SearchSpeakersRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "speakers", targetCulture); }
 
-        public IEnumerable<TEDSpeaker> SearchSpeakers(string query)
-        { return this.SearchAll(query, "speakers").Cast<TEDSpeaker>(); }
+        public IEnumerable<TEDSpeaker> SearchSpeakers(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "speakers", targetCulture).Cast<TEDSpeaker>(); }
 
-        public XmlDocument SearchFellowsRaw(string query)
-        { return this.SearchAllRaw(query, "fellows"); }
+        public XmlDocument SearchFellowsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "fellows", targetCulture); }
 
-        public IEnumerable<TEDFellowsProfile> SearchFellows(string query)
-        { return this.SearchAll(query, "fellows").Cast<TEDFellowsProfile>(); }
+        public IEnumerable<TEDFellowsProfile> SearchFellows(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "fellows", targetCulture).Cast<TEDFellowsProfile>(); }
 
-        public XmlDocument SearchThemesRaw(string query)
-        { return this.SearchAllRaw(query, "themes"); }
+        public XmlDocument SearchThemesRaw(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAllRaw(query, "themes", targetCulture); }
 
-        public IEnumerable<TEDTheme> SearchThemes(string query)
-        { return this.SearchAll(query, "themes").Cast<TEDTheme>(); }
+        public IEnumerable<TEDTheme> SearchThemes(string query, CultureInfo targetCulture = default(CultureInfo))
+        { return this.SearchAll(query, "themes", targetCulture).Cast<TEDTheme>(); }
 
         private T ParseTEDItem<T>(XmlNode node, T item)
             where T : ITEDItem
