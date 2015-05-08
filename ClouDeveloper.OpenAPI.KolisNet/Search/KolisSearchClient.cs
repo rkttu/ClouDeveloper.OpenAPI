@@ -6,15 +6,35 @@ using System.Xml;
 
 namespace ClouDeveloper.OpenAPI.KolisNet.Search
 {
+    /// <summary>
+    /// KolisSearchClient
+    /// </summary>
     public class KolisSearchClient
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KolisSearchClient"/> class.
+        /// </summary>
         public KolisSearchClient()
             : base()
         {
         }
 
+        /// <summary>
+        /// The client factory
+        /// </summary>
         private Lazy<HttpClient> clientFactory = new Lazy<HttpClient>(true);
 
+        /// <summary>
+        /// Asserts the response.
+        /// </summary>
+        /// <param name="doc">The document.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// doc
+        /// or
+        /// doc
+        /// </exception>
+        /// <exception cref="KolisSearchException"></exception>
         private static XmlDocument AssertResponse(XmlDocument doc)
         {
             if (doc == null)
@@ -27,6 +47,12 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return doc;
         }
 
+        /// <summary>
+        /// Builds the request URI.
+        /// </summary>
+        /// <param name="targetUri">The target URI.</param>
+        /// <param name="items">The items.</param>
+        /// <returns></returns>
         private static Uri BuildRequestUri(
             string targetUri = "http://nl.go.kr/kolisnet/openApi/open.php",
             params KeyValuePair<string, string>[] items)
@@ -57,6 +83,12 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return requestUriBuilder.Uri;
         }
 
+        /// <summary>
+        /// Searches the raw.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">request</exception>
         public XmlDocument SearchRaw(KolisSearchRequest request)
         {
             if (request == null)
@@ -67,6 +99,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the specified request.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
         public KolisSearchResponse Search(KolisSearchRequest request)
         {
             XmlDocument doc = this.SearchRaw(request);
@@ -123,6 +160,12 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return response;
         }
 
+        /// <summary>
+        /// Gets the bibliography information raw.
+        /// </summary>
+        /// <param name="bibliographyKey">The bibliography key.</param>
+        /// <param name="controlNo">The control no.</param>
+        /// <returns></returns>
         public XmlDocument GetBibliographyInfoRaw(string bibliographyKey, string controlNo = default(string))
         {
             List<KeyValuePair<string, string>> kvpList = new List<KeyValuePair<string, string>>();
@@ -136,6 +179,12 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Gets the bibliography information.
+        /// </summary>
+        /// <param name="bibliographyKey">The bibliography key.</param>
+        /// <param name="controlNo">The control no.</param>
+        /// <returns></returns>
         public BibliographyDetailInfoResponse GetBibliographyInfo(string bibliographyKey, string controlNo = default(string))
         {
             XmlDocument doc = this.GetBibliographyInfoRaw(bibliographyKey, controlNo);
@@ -222,6 +271,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return response;
         }
 
+        /// <summary>
+        /// Gets the library information raw.
+        /// </summary>
+        /// <param name="libraryCode">The library code.</param>
+        /// <returns></returns>
         public XmlDocument GetLibraryInfoRaw(string libraryCode)
         {
             XmlDocument doc = new XmlDocument();
@@ -232,6 +286,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Gets the library information.
+        /// </summary>
+        /// <param name="libraryCode">The library code.</param>
+        /// <returns></returns>
         public LibraryInfo GetLibraryInfo(string libraryCode)
         {
             XmlDocument doc = this.GetLibraryInfoRaw(libraryCode);
@@ -275,6 +334,13 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             return response;
         }
 
+        /// <summary>
+        /// Gets the bibliography marc document.
+        /// </summary>
+        /// <param name="libraryCode">The library code.</param>
+        /// <param name="bibliographyKey">The bibliography key.</param>
+        /// <param name="authKey">The authentication key.</param>
+        /// <returns></returns>
         public string GetBibliographyMarcDocument(string libraryCode, string bibliographyKey, string authKey)
         {
             Uri targetUri = BuildRequestUri(

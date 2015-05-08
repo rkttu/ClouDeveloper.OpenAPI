@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace ClouDeveloper.OpenAPI.KolisNet.Search
 {
+    /// <summary>
+    /// KolisSearchRequest
+    /// </summary>
     public sealed class KolisSearchRequest
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KolisSearchRequest"/> class.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="page">The page.</param>
         public KolisSearchRequest(string query, int page)
             : base()
         {
@@ -14,51 +22,234 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             this.PerPage = 10;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KolisSearchRequest"/> class.
+        /// </summary>
+        /// <param name="query">The query.</param>
         public KolisSearchRequest(string query)
             : this(query, 1)
         {
         }
 
+        /// <summary>
+        /// Gets or sets the collection set.
+        /// </summary>
+        /// <value>
+        /// The collection set.
+        /// </value>
         public CollectionSet? CollectionSet { get; set; }
+        /// <summary>
+        /// Gets or sets the page.
+        /// </summary>
+        /// <value>
+        /// The page.
+        /// </value>
         public int Page { get; set; }
 
+        /// <summary>
+        /// Gets or sets the search field1.
+        /// </summary>
+        /// <value>
+        /// The search field1.
+        /// </value>
         public SearchField? SearchField1 { get; set; }
+        /// <summary>
+        /// Gets or sets the value1.
+        /// </summary>
+        /// <value>
+        /// The value1.
+        /// </value>
         public string Value1 { get; set; }
+        /// <summary>
+        /// Gets or sets the and or not1.
+        /// </summary>
+        /// <value>
+        /// The and or not1.
+        /// </value>
         public Operator? AndOrNot1 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the search field2.
+        /// </summary>
+        /// <value>
+        /// The search field2.
+        /// </value>
         public SearchField? SearchField2 { get; set; }
+        /// <summary>
+        /// Gets or sets the value2.
+        /// </summary>
+        /// <value>
+        /// The value2.
+        /// </value>
         public string Value2 { get; set; }
+        /// <summary>
+        /// Gets or sets the and or not2.
+        /// </summary>
+        /// <value>
+        /// The and or not2.
+        /// </value>
         public Operator? AndOrNot2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the search field3.
+        /// </summary>
+        /// <value>
+        /// The search field3.
+        /// </value>
         public SearchField? SearchField3 { get; set; }
+        /// <summary>
+        /// Gets or sets the value3.
+        /// </summary>
+        /// <value>
+        /// The value3.
+        /// </value>
         public string Value3 { get; set; }
+        /// <summary>
+        /// Gets or sets the and or not3.
+        /// </summary>
+        /// <value>
+        /// The and or not3.
+        /// </value>
         public Operator? AndOrNot3 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the search field4.
+        /// </summary>
+        /// <value>
+        /// The search field4.
+        /// </value>
         public SearchField? SearchField4 { get; set; }
+        /// <summary>
+        /// Gets or sets the value4.
+        /// </summary>
+        /// <value>
+        /// The value4.
+        /// </value>
         public string Value4 { get; set; }
+        /// <summary>
+        /// Gets or sets the and or not4.
+        /// </summary>
+        /// <value>
+        /// The and or not4.
+        /// </value>
         public Operator? AndOrNot4 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the search field5.
+        /// </summary>
+        /// <value>
+        /// The search field5.
+        /// </value>
         public SearchField? SearchField5 { get; set; }
+        /// <summary>
+        /// Gets or sets the value5.
+        /// </summary>
+        /// <value>
+        /// The value5.
+        /// </value>
         public string Value5 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the gubun1.
+        /// </summary>
+        /// <value>
+        /// The gubun1.
+        /// </value>
         public StandardCode? Gubun1 { get; set; }
+        /// <summary>
+        /// Gets or sets the code1.
+        /// </summary>
+        /// <value>
+        /// The code1.
+        /// </value>
         public string Code1 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the gubun2.
+        /// </summary>
+        /// <value>
+        /// The gubun2.
+        /// </value>
         public ClassificationCode? Gubun2 { get; set; }
+        /// <summary>
+        /// Gets or sets the code2.
+        /// </summary>
+        /// <value>
+        /// The code2.
+        /// </value>
         public string Code2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the start year.
+        /// </summary>
+        /// <value>
+        /// The start year.
+        /// </value>
         public int? StartYear { get; set; }
+        /// <summary>
+        /// Gets or sets the end year.
+        /// </summary>
+        /// <value>
+        /// The end year.
+        /// </value>
         public int? EndYear { get; set; }
+        /// <summary>
+        /// Gets or sets the maximum count.
+        /// </summary>
+        /// <value>
+        /// The maximum count.
+        /// </value>
         public int? MaxCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the sort KSJ.
+        /// </summary>
+        /// <value>
+        /// The sort KSJ.
+        /// </value>
         public SearchResultSort? SortKSJ { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [hanja trans].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [hanja trans]; otherwise, <c>false</c>.
+        /// </value>
         public bool HanjaTrans { get; set; }
+        /// <summary>
+        /// Gets or sets the per page.
+        /// </summary>
+        /// <value>
+        /// The per page.
+        /// </value>
         public int PerPage { get; set; }
+        /// <summary>
+        /// Gets or sets the form class.
+        /// </summary>
+        /// <value>
+        /// The form class.
+        /// </value>
         public string FormClass { get; set; }
 
+        /// <summary>
+        /// Gets or sets the library type detail.
+        /// </summary>
+        /// <value>
+        /// The library type detail.
+        /// </value>
         public int? LibTypeDetail { get; set; }
+        /// <summary>
+        /// Gets or sets the library.
+        /// </summary>
+        /// <value>
+        /// The library.
+        /// </value>
         public string Library { get; set; }
 
+        /// <summary>
+        /// Gets the search field string.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         private string GetSearchFieldString(SearchField value)
         {
             switch (value)
@@ -71,6 +262,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             }
         }
 
+        /// <summary>
+        /// Gets the operator string.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         private string GetOperatorString(Operator value)
         {
             switch (value)
@@ -82,6 +278,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             }
         }
 
+        /// <summary>
+        /// Gets the standard code string.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         private string GetStandardCodeString(StandardCode value)
         {
             switch (value)
@@ -99,6 +300,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             }
         }
 
+        /// <summary>
+        /// Gets the classification code string.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         private string GetClassificationCodeString(ClassificationCode value)
         {
             switch (value)
@@ -115,6 +321,11 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             }
         }
 
+        /// <summary>
+        /// Gets the sort KSJ string.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         private string GetSortKSJString(SearchResultSort value)
         {
             switch (value)
@@ -129,6 +340,10 @@ namespace ClouDeveloper.OpenAPI.KolisNet.Search
             }
         }
 
+        /// <summary>
+        /// To the key value pairs.
+        /// </summary>
+        /// <returns></returns>
         public KeyValuePair<string, string>[] ToKeyValuePairs()
         {
             List<KeyValuePair<string, string>> kvpList = new List<KeyValuePair<string, string>>();
