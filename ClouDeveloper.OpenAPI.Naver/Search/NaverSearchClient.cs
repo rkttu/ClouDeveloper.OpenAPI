@@ -6,16 +6,40 @@ using System.Xml;
 
 namespace ClouDeveloper.OpenAPI.Naver.Search
 {
+    /// <summary>
+    /// NaverSearchClient
+    /// </summary>
     public sealed class NaverSearchClient
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaverSearchClient"/> class.
+        /// </summary>
+        /// <param name="key">The key.</param>
         public NaverSearchClient(string key)
             : base()
         {
             this.Key = key;
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>
+        /// The key.
+        /// </value>
         public string Key { get; set; }
 
+        /// <summary>
+        /// Asserts the response.
+        /// </summary>
+        /// <param name="doc">The document.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// doc
+        /// or
+        /// doc
+        /// </exception>
+        /// <exception cref="NaverSearchException"></exception>
         private static XmlDocument AssertResponse(XmlDocument doc)
         {
             if (doc == null)
@@ -27,6 +51,11 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return doc;
         }
 
+        /// <summary>
+        /// Builds the request URI.
+        /// </summary>
+        /// <param name="items">The items.</param>
+        /// <returns></returns>
         private static Uri BuildRequestUri(params KeyValuePair<string, string>[] items)
         {
             UriBuilder requestUriBuilder = new UriBuilder(new Uri("http://openapi.naver.com/search", UriKind.Absolute));
@@ -55,6 +84,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return requestUriBuilder.Uri;
         }
 
+        /// <summary>
+        /// Searches the blog raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public XmlDocument SearchBlogRaw(
             string query,
             int display = 10,
@@ -84,6 +121,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the blog.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<BlogSearchResult> SearchBlog(
             string query,
             int display = 10,
@@ -135,6 +180,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the news raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public XmlDocument SearchNewsRaw(
             string query,
             int display = 10,
@@ -164,6 +217,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the news.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<NewsSearchResult> SearchNews(
             string query,
             int display = 10,
@@ -212,6 +273,21 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the books raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="author">The author.</param>
+        /// <param name="contents">The contents.</param>
+        /// <param name="isbn">The isbn.</param>
+        /// <param name="publisher">The publisher.</param>
+        /// <param name="publishedDateFrom">The published date from.</param>
+        /// <param name="publishedDateTo">The published date to.</param>
+        /// <param name="category">The category.</param>
+        /// <returns></returns>
         public XmlDocument SearchBooksRaw(
             string query,
             int display = 10,
@@ -292,6 +368,21 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the books.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="author">The author.</param>
+        /// <param name="contents">The contents.</param>
+        /// <param name="isbn">The isbn.</param>
+        /// <param name="publisher">The publisher.</param>
+        /// <param name="publishedDateFrom">The published date from.</param>
+        /// <param name="publishedDateTo">The published date to.</param>
+        /// <param name="category">The category.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<BooksSearchResult> SearchBooks(
             string query,
             int display = 10,
@@ -361,6 +452,11 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Classifies the sexual search keyword raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
         public XmlDocument ClassifySexualSearchKeywordRaw(
             string query)
         {
@@ -373,6 +469,12 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Determines whether [is sexual search keyword] [the specified query].
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">adult node is not available.</exception>
         public bool IsSexualSearchKeyword(
             string query)
         {
@@ -383,6 +485,13 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return ((Int32.Parse(adultNode.InnerText)) != 0);
         }
 
+        /// <summary>
+        /// Searches the encyclopedia raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <returns></returns>
         public XmlDocument SearchEncyclopediaRaw(
             string query,
             int display = 10,
@@ -399,6 +508,13 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the encyclopedia.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<EncyclopediaSearchResult> SearchEncyclopedia(
             string query,
             int display = 10,
@@ -441,6 +557,16 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the movie raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="genre">The genre.</param>
+        /// <param name="country">The country.</param>
+        /// <param name="yearFromTo">The year from to.</param>
+        /// <returns></returns>
         public XmlDocument SearchMovieRaw(
             string query,
             int display = 10,
@@ -503,6 +629,16 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the movie.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="genre">The genre.</param>
+        /// <param name="country">The country.</param>
+        /// <param name="yearFromTo">The year from to.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<MovieSearchResult> SearchMovie(
             string query,
             int display = 10,
@@ -555,6 +691,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the cafe article raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public XmlDocument SearchCafeArticleRaw(
             string query,
             int display = 10,
@@ -584,6 +728,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the cafe article.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<CafeArticleSearchResult> SearchCafeArticle(
             string query,
             int display = 10,
@@ -628,6 +780,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the knowledge in raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public XmlDocument SearchKnowledgeInRaw(
             string query,
             int display = 10,
@@ -663,6 +823,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the knowledge in.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<KnowledgeInSearchResult> SearchKnowledgeIn(
             string query,
             int display = 10,
@@ -703,6 +871,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the local raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public XmlDocument SearchLocalRaw(
             string query,
             int display = 10,
@@ -735,6 +911,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the local.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<LocalSearchResult> SearchLocal(
             string query,
             int display = 10,
@@ -788,6 +972,11 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Suggests the errata raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
         public XmlDocument SuggestErrataRaw(
             string query)
         {
@@ -800,6 +989,12 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Suggests the errata.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">errata node is not available.</exception>
         public string SuggestErrata(
             string query)
         {
@@ -810,6 +1005,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return errataNode.InnerText;
         }
 
+        /// <summary>
+        /// Searches the korean web raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="domain">The domain.</param>
+        /// <returns></returns>
         public XmlDocument SearchKoreanWebRaw(
             string query,
             int display = 10,
@@ -832,6 +1035,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the korean web.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="domain">The domain.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<KoreanWebSearchResult> SearchKoreanWeb(
             string query,
             int display = 10,
@@ -872,6 +1083,15 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the image raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <param name="filter">The filter.</param>
+        /// <returns></returns>
         public XmlDocument SearchImageRaw(
             string query,
             int display = 10,
@@ -920,6 +1140,15 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the image.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <param name="filter">The filter.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<ImageSearchResult> SearchImage(
             string query,
             int display = 10,
@@ -965,6 +1194,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the product raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public XmlDocument SearchProductRaw(
             string query,
             int display = 10,
@@ -1000,6 +1237,14 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the product.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<ProductSearchResult> SearchProduct(
             string query,
             int display = 10,
@@ -1050,6 +1295,13 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return result;
         }
 
+        /// <summary>
+        /// Searches the document raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <returns></returns>
         public XmlDocument SearchDocumentRaw(
             string query,
             int display = 10,
@@ -1066,6 +1318,13 @@ namespace ClouDeveloper.OpenAPI.Naver.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches the document.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="display">The display.</param>
+        /// <param name="start">The start.</param>
+        /// <returns></returns>
         public NaverSearchResponseContainer<DocumentSearchResult> SearchDocument(
             string query,
             int display = 10,
