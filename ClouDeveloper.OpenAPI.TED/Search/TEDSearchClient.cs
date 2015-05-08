@@ -8,16 +8,40 @@ using System.Xml;
 
 namespace ClouDeveloper.OpenAPI.TED.Search
 {
+    /// <summary>
+    /// TEDSearchClient
+    /// </summary>
     public sealed class TEDSearchClient
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TEDSearchClient"/> class.
+        /// </summary>
+        /// <param name="key">The key.</param>
         public TEDSearchClient(string key)
             : base()
         {
             this.Key = key;
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>
+        /// The key.
+        /// </value>
         public string Key { get; set; }
 
+        /// <summary>
+        /// Asserts the response.
+        /// </summary>
+        /// <param name="doc">The document.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// doc
+        /// or
+        /// doc
+        /// </exception>
+        /// <exception cref="TEDSearchException"></exception>
         private static XmlDocument AssertResponse(XmlDocument doc)
         {
             if (doc == null)
@@ -29,6 +53,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return doc;
         }
 
+        /// <summary>
+        /// Builds the request URI.
+        /// </summary>
+        /// <param name="items">The items.</param>
+        /// <returns></returns>
         private static Uri BuildRequestUri(params KeyValuePair<string, string>[] items)
         {
             UriBuilder requestUriBuilder = new UriBuilder(new Uri("https://api.ted.com/v1/search.xml", UriKind.Absolute));
@@ -57,6 +86,13 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return requestUriBuilder.Uri;
         }
 
+        /// <summary>
+        /// Searches all raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="category">The category.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchAllRaw(
             string query,
             string category = default(string),
@@ -78,6 +114,13 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return AssertResponse(doc);
         }
 
+        /// <summary>
+        /// Searches all.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="category">The category.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<ITEDItem> SearchAll(
             string query,
             string category = default(string),
@@ -127,54 +170,158 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return items.AsReadOnly();
         }
 
+        /// <summary>
+        /// Searches the talks raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchTalksRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "talks", targetCulture); }
 
+        /// <summary>
+        /// Searches the talks.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDTalk> SearchTalks(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "talks", targetCulture).Cast<TEDTalk>(); }
 
+        /// <summary>
+        /// Searches the playlists raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchPlaylistsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "playlists", targetCulture); }
 
+        /// <summary>
+        /// Searches the playlists.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDPlaylist> SearchPlaylists(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "playlists", targetCulture).Cast<TEDPlaylist>(); }
-        
+
+        /// <summary>
+        /// Searches the blog posts raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchBlogPostsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "blog_posts", targetCulture); }
 
+        /// <summary>
+        /// Searches the blog posts.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDWordPressPost> SearchBlogPosts(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "blog_posts", targetCulture).Cast<TEDWordPressPost>(); }
 
+        /// <summary>
+        /// Searches the conversations raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchConversationsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "converstations", targetCulture); }
 
+        /// <summary>
+        /// Searches the conversations.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDConversation> SearchConversations(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "converstations", targetCulture).Cast<TEDConversation>(); }
 
+        /// <summary>
+        /// Searches the ted local events raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchTEDLocalEventsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "tedx_events", targetCulture); }
 
+        /// <summary>
+        /// Searches the ted local events.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDLocalEvent> SearchTEDLocalEvents(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "tedx_events", targetCulture).Cast<TEDLocalEvent>(); }
 
+        /// <summary>
+        /// Searches the speakers raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchSpeakersRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "speakers", targetCulture); }
 
+        /// <summary>
+        /// Searches the speakers.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDSpeaker> SearchSpeakers(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "speakers", targetCulture).Cast<TEDSpeaker>(); }
 
+        /// <summary>
+        /// Searches the fellows raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchFellowsRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "fellows", targetCulture); }
 
+        /// <summary>
+        /// Searches the fellows.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDFellowsProfile> SearchFellows(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "fellows", targetCulture).Cast<TEDFellowsProfile>(); }
 
+        /// <summary>
+        /// Searches the themes raw.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public XmlDocument SearchThemesRaw(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAllRaw(query, "themes", targetCulture); }
 
+        /// <summary>
+        /// Searches the themes.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="targetCulture">The target culture.</param>
+        /// <returns></returns>
         public IEnumerable<TEDTheme> SearchThemes(string query, CultureInfo targetCulture = default(CultureInfo))
         { return this.SearchAll(query, "themes", targetCulture).Cast<TEDTheme>(); }
 
+        /// <summary>
+        /// Parses the ted item.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="node">The node.</param>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">item</exception>
         private T ParseTEDItem<T>(XmlNode node, T item)
             where T : ITEDItem
         {
@@ -193,6 +340,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the talk.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDTalk ParseTalk(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDTalk());
@@ -248,6 +400,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the playlist.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDPlaylist ParsePlaylist(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDPlaylist());
@@ -279,6 +436,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the word press post.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDWordPressPost ParseWordPressPost(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDWordPressPost());
@@ -386,6 +548,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the conversation.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDConversation ParseConversation(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDConversation());
@@ -448,6 +615,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the ted local event.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDLocalEvent ParseTEDLocalEvent(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDLocalEvent());
@@ -545,6 +717,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the fellows profile.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDFellowsProfile ParseFellowsProfile(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDFellowsProfile());
@@ -744,6 +921,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the theme.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDTheme ParseTheme(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDTheme());
@@ -773,6 +955,11 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             return item;
         }
 
+        /// <summary>
+        /// Parses the unclassified item.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns></returns>
         private TEDUnclassifiedItem ParseUnclassifiedItem(XmlNode node)
         {
             var item = ParseTEDItem(node, new TEDUnclassifiedItem());
