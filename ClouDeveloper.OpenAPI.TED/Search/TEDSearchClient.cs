@@ -108,7 +108,7 @@ namespace ClouDeveloper.OpenAPI.TED.Search
                 parameters.Add(new KeyValuePair<string,string>("categories", category));
 
             if (targetCulture != default(CultureInfo))
-                parameters.Add(new KeyValuePair<string, string>("language", targetCulture.IetfLanguageTag));
+                parameters.Add(new KeyValuePair<string, string>("language", targetCulture.TwoLetterISOLanguageName));
 
             doc.Load(BuildRequestUri(parameters.ToArray()).AbsoluteUri);
             return AssertResponse(doc);
@@ -126,7 +126,7 @@ namespace ClouDeveloper.OpenAPI.TED.Search
             string category = default(string),
             CultureInfo targetCulture = default(CultureInfo))
         {
-            XmlDocument doc = this.SearchAllRaw(query, category);
+            XmlDocument doc = this.SearchAllRaw(query, category, targetCulture);
             List<ITEDItem> items = new List<ITEDItem>();
 
             foreach (XmlNode eachNode in doc.SelectNodes("/response/results/*"))
